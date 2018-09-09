@@ -3,14 +3,28 @@
 source cs_dirs
 
 cd $HOME_DIR
-git pull && git submodule init wget && git submodule update && git submodule status
+git pull && git submodule init && git submodule update && git submodule status
+
+echo Configuring node repo
+curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 echo HOME set at $HOME_DIR
 echo 'Updating apt-get'
 apt-get -y update
 
 echo 'Installing packages'
-apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
+apt-get -y install nodejs npm ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
+
+echo 'Get node wget deps'
+cd $HOME_DIR/node-wget-promise
+npm install
+
+echo 'Get node scratch deps'
+cd $HOME_DIR/scratch-gui
+npm install
+
+cd $HOME_DIR
+
 echo 'Removing ntp -> interfers with dhclient'
 apt-get -y remove ntp
 
@@ -47,14 +61,5 @@ mkdir -p $SCRATCH
 
 echo 'Starting nginx'
 service nginx start
-
-echo 'Running wget configure'
-cd $HOME_DIR/wget
-LOG=$HOME_DIR/wget/install.txt
-rm -f $LOG
-./configure >> $LOG 2>> $LOG
-
-echo 'Running wget make'
-make >> $LOG 2>> $LOG
 
 echo Configure stage is done. 
