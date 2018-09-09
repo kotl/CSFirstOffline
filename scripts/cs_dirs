@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+HOME_DIR=$( dirname "${SCRIPT_DIR}" )
+WGET_BIN=$HOME_DIR/wget/src/wget
+WWW=/var/www
+
+CS=$WWW/cs
+WWW_DOWNLOAD=$WWW/cs
+SCRATCH=$WWW/scratch
+CLOUD=$WWW/cloud

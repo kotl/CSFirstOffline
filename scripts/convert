@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source cs_dirs
+
+mkdir -p $SCRATCH/projects
+
+echo scanning all downloaded data
+
+find $WWW_DOWNLOAD/csfirst.withgoogle.com/ -type f -exec grep scratch.mit.edu/projects/ {} \; \
+ | grep -o -E 'http://scratch.mit.edu/projects/[0-9]+' | sort -u > $SCRATCH/projects/links.txt
+
+cp $SCRATCH/projects/links.txt /tmp/missing.txt
+
+echo converting all existing projects
+# Deleting all existing first
+cp $HOME_DIR/projects/index.html $SCRATCH/projects/
+
+for f in $HOME_DIR/projects/*.sb2
+do
+  # TODO: determine missing projects
+done
+
+# echo Missing projects:
+# cat $SCRATCH/projects/missing.txt

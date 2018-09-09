@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source cs_dirs
+
+cd $HOME_DIR/scripts
+
+./configure 2>&1 | tee /tmp/fulllog_1.txt 
+
+./download 2>&1 | tee /tmp/fulllog_2.txt 
+
+./convert 2>&1 | tee /tmp/fulllog_3.txt 
+
+echo Everything is done

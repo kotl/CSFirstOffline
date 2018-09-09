@@ -1,0 +1,60 @@
+#!/bin/bash
+
+source cs_dirs
+
+cd $HOME_DIR
+git pull && git submodule init wget && git submodule update && git submodule status
+
+echo HOME set at $HOME_DIR
+echo 'Updating apt-get'
+apt-get -y update
+
+echo 'Installing packages'
+apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
+echo 'Removing ntp -> interfers with dhclient'
+apt-get -y remove ntp
+
+echo 'Stopping nginx'
+service nginx stop
+service dnsmasq stop
+unlink /etc/nginx/sites-enabled/default
+
+echo Copying nginx config over to /etc/nginx/
+cp -a $HOME_DIR/nginx/* /etc/nginx/
+
+echo 'Copy dns configs'
+cp -a $HOME_DIR/dns/cs.conf /etc/dnsmasq.d/
+cp -a $HOME_DIR/dns/rc.local /etc/
+cp -a $HOME_DIR/dns/dhclient.conf /etc/dhcp/
+cp -a $HOME_DIR/dns/interfaces /etc/network/
+rm -f /etc/rc5.d/S02dnsmasq
+rm -f /etc/rc2.d/S02dnsmasq
+rm -f /etc/rc4.d/S02dnsmasq
+rm -f /etc/rc3.d/S02dnsmasq
+
+echo Removing default_type in nginx.conf
+grep -v default_type /etc/nginx/nginx.conf > /tmp/nginx.conf
+mv /tmp/nginx.conf /etc/nginx/nginx.conf
+unlink /etc/nginx/sites-enabled/cs
+ln -s /etc/nginx/sites-available/cs /etc/nginx/sites-enabled/cs
+
+echo Creating directories
+mkdir -p $WWW
+mkdir -p $WWW_DOWNLOAD
+mkdir -p $SCRATCH
+
+# chown -R www-data $WWW/data
+
+echo 'Starting nginx'
+service nginx start
+
+echo 'Running wget configure'
+cd $HOME_DIR/wget
+LOG=$HOME_DIR/wget/install.txt
+rm -f $LOG
+./configure >> $LOG 2>> $LOG
+
+echo 'Running wget make'
+make >> $LOG 2>> $LOG
+
+echo Configure stage is done. 

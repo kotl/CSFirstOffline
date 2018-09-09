@@ -1,0 +1,95 @@
+- INSTALLING ON RASPBERRY PI.
+ -- These instructions are based on 2015-02-16-raspbian-wheezy.
+ -- Minimum 16Gb SD card will be needed. In future might need even more space, plan accordingly.
+ -- Download and read instructions here: http://www.raspberrypi.org/downloads/
+
+------------------------------------------------------------------------------------------------
+Step 1. Install wheezy on SD card using method that's available to you.
+        Boot Raspberry PI and connect to HDMI monitor and usb keyboard.
+------------------------------------------------------------------------------------------------
+Step 2. You will see rasp-config application, please choose the following options:
+
+1. Expand filesystem -> YES
+2. Change user password -> Whatever you want
+3. Enable Boot ->  Choose first option -> Console Text console
+8. Advanced Options
+	A3. Memory split -> 16
+	A4. SSH -> Enabled
+------------------------------------------------------------------------------------------------
+Step 3. Choose finish and reboot Rasp PI
+------------------------------------------------------------------------------------------------
+Step 4. Connect by SSH or through Terminal. Enter username: pi and password that you have setup in Step 2-> Option 2
+
+( You must be connected to internet through Ethernet port! )
+
+Execute these commands:
+git clone https://github.com/kotl/CSFirstOffline.git cs
+cd cs/scripts
+sudo ./run_all
+
+This will take very long time (from several hours to a day). Keep internet connected!
+Downloading step takes particularly long. 
+
+------------------------------------------------------------------------------------------------
+Step 5. Configure router for local DNS redirection.
+
+- Raspberry PI must be connected into a network which has DHCP server running (on local wired or wireless router).
+  PI should be setup to always receive the same IP address in the network (setup this on the router in static DHCP
+  section). You can find MAC address (HWaddr) by running 'ifconfig -v eth0' in the terminal of Rasp PI.
+  Also, router must run DNSMasq service that will forward all DNS requests to Rasp PI. This is important, otherwise
+  fake DNS entries won't work. To get configuration required to be used in DNSMasq, point browser of your client
+  computer connected into this local network to the address of Rasp PI, like this:
+    http://192.168.30.2/scratch/dns.php  
+    ( where 192.168.30.2 is address of Rasp PI )
+    Copy resulting page into DNSMasq configuration in the router and reboot router.
+
+- Point your browser to admin interface at http://scratch.mit.edu/admin.php 
+  If it works - you are now ready to start your classes! Make sure you understand
+  how to login to this admin interface as you will need to use it from class to class.
+
+- Do not use this router to access internet -> sites that are redirected in DNSMasq configuration
+  will still get redirected.
+
+- Updates steps below can be repeated as needed. Watch github repo for updates.
+
+- Students should access CSFirst by going to http://www.cs-first.com and choosing appropriate lessons.
+
+-------------------------------------------------------------------------------------------------
+Getting updates:
+
+The easiest thing to do is to execute run_all again.
+It is recommended that you backup your SD card first, just in case.
+(You can use WIN32Imager on Windows for example)
+
+And don't forget to take Raspberry PI out of local router (that you modified with DNSMasq settings)
+network and connect it to Internet to perform update steps. This is very important because
+you may end up hitting the same Raspberry PI unit because of DNS redirection.
+
+
+You can also run update steps individually:
+------------------------------------------------------------------------------------------------
+Configure (this is only required if anything in CSFirstOffline submodules have changed.)
+We will probably tag each repo that requires run of configure script.
+
+Execute:
+cd /home/pi/cs/scripts
+sudo ./configure
+
+------------------------------------------------------------------------------------------------
+Download latest cs-first data:
+
+Execute:
+cd /home/pi/cs/scripts
+sudo ./download
+
+This can take very long time (i.e. from several hours to days, depending on your connection)
+
+If Rasp PI gets rebooted, you can simply login and execute this command again. Prior progress won't be lost,
+just make sure it is completely finished. 
+------------------------------------------------------------------------------------------------
+- Adopt downloaded data for use:
+
+Execute:
+cd /home/pi/cs/scripts
+sudo ./convert
+------------------------------------------------------------------------------------------------

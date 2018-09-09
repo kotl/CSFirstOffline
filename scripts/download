@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source cs_dirs
+
+cd $HOME_DIR
+git pull
+
+mkdir -p $WWW_DOWNLOAD
+cd $WWW_DOWNLOAD
+
+WGET_SINGLE="$WGET_BIN -r -l 1"
+
+$WGET_SINGLE http://www.google.com/css/maia.experimental.css
+$WGET_SINGLE http://www.google.com/js/google.js
+$WGET_SINGLE http://www.google.com/js/maia.js
+$WGET_SINGLE http://js-agent.newrelic.com/nr-632.min.js
+$WGET_SINGLE "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300"
+$WGET_SINGLE "http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" 
+
+rm -f wget-log*
+$WGET_BIN -o $WWW_DOWNLOAD/wget-log -r -l 50 https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html -D csfirst.withgoogle.com,www.cs-first.com,cs-first.com,files.cs-first.com,fonts.googleapis.com,ajax.googleapis.com,storage.googleapis.com,fonts.gstatic.com,apis.google.com,ssl.gstatic.com -N -X /users -R ogv -H -A \*
+
+# TODO: some kind of magic needs to happen with fonts, we need to do the same thing with expressjs 
+# cp $HOME_DIR/scripts/css.php $WWW_DOWNLOAD/fonts.googleapis.com/
