@@ -8,16 +8,16 @@ git pull
 mkdir -p $WWW_DOWNLOAD
 cd $WWW_DOWNLOAD
 
-rm -rf data
-mkdir data
+rm -rf cs
+mkdir cs
 
 node $HOME_DIR/scripts/scraper.js
 
-cd $WWW_DOWNLOAD/data/sites
+cd $WWW_DOWNLOAD/cs/sites
 bash ../download.sh
 
-cd $WWW_DOWNLOAD
-mv data/sites/* ./
+cd $WWW_DOWNLOAD/cs
+mv cs/sites/* ./
 
 # WGET_SINGLE="$WGET_BIN -r -l 1"
 

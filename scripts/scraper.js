@@ -2,7 +2,7 @@ var scrape = require('website-scraper');
 var path = require('path');
 var fs = require('fs');
 
-var stream = fs.createWriteStream("data/download.sh");
+var stream = fs.createWriteStream("cs/download.sh");
 
 var sites = [
 /* { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
@@ -71,10 +71,10 @@ for(site of sites) {
   console.log("Processing url: " + site.urls[0]);
   var options = site;
   var url = new URL(site.urls[0]);
-  options.directory = "./data/sites";
+  options.directory = "./cs/sites";
   if (site.recursive === false) {
     options.defaultFilename = site.urls[0].substring(site.urls[0].lastIndexOf("/")+1);
-    options.directory = "./data/sites" + url.hostname;
+    options.directory = "./cs/sites" + url.hostname;
     options.filenameGenerator = (resource, options, occupiedFileNames) => {
       return resource.filename;
     }

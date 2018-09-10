@@ -10,6 +10,7 @@ find $WWW_DOWNLOAD/csfirst.withgoogle.com/ -type f -exec grep scratch.mit.edu/pr
  | grep -o -E 'http://scratch.mit.edu/projects/[0-9]+' | sort -u > $SCRATCH/projects/links.txt
 
 cp $SCRATCH/projects/links.txt /tmp/missing.txt
+cp $SCRATCH/projects/links.txt $HOME_DIR/projects/
 
 echo converting all existing projects
 # Deleting all existing first
