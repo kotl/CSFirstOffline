@@ -44,7 +44,6 @@ var rejectExtensions = [
 
 var externalDownloadExtensions = [
   ".mp4",
-  ".vtt",
 ];
 
 var options = {
