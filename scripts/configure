@@ -2,64 +2,64 @@
 
 source cs_dirs
 
+sudo localectl set-locale LANG=en_CA.UTF-8
+
 cd $HOME_DIR
 git pull && git submodule init && git submodule update && git submodule status
 
 echo Configuring node repo
-curl -sL https://deb.nodesource.com/setup_10.x | bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 echo HOME set at $HOME_DIR
 echo 'Updating apt-get'
-apt-get -y update
+sudo apt-get -y update
 
 echo 'Installing packages'
-apt-get -y install nodejs npm ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
-
-echo 'Get node wget deps'
-cd $HOME_DIR/node-wget-promise
-npm install
+sudo apt-get -y install nodejs npm ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
 
 echo 'Get node scratch deps'
 cd $HOME_DIR/scratch-gui
 npm install
 
+echo Installing web scraper globally
+sudo npm install website-scraper -g
+
 cd $HOME_DIR
 
 echo 'Removing ntp -> interfers with dhclient'
-apt-get -y remove ntp
+sudo apt-get -y remove ntp
 
 echo 'Stopping nginx'
-service nginx stop
-service dnsmasq stop
-unlink /etc/nginx/sites-enabled/default
+sudo service nginx stop
+sudo service dnsmasq stop
+sudo unlink /etc/nginx/sites-enabled/default
 
 echo Copying nginx config over to /etc/nginx/
-cp -a $HOME_DIR/nginx/* /etc/nginx/
+sudo cp -a $HOME_DIR/nginx/* /etc/nginx/
 
 echo 'Copy dns configs'
-cp -a $HOME_DIR/dns/cs.conf /etc/dnsmasq.d/
-cp -a $HOME_DIR/dns/rc.local /etc/
-cp -a $HOME_DIR/dns/dhclient.conf /etc/dhcp/
-cp -a $HOME_DIR/dns/interfaces /etc/network/
-rm -f /etc/rc5.d/S02dnsmasq
-rm -f /etc/rc2.d/S02dnsmasq
-rm -f /etc/rc4.d/S02dnsmasq
-rm -f /etc/rc3.d/S02dnsmasq
+sudo cp -a $HOME_DIR/dns/cs.conf /etc/dnsmasq.d/
+sudo cp -a $HOME_DIR/dns/rc.local /etc/
+sudo cp -a $HOME_DIR/dns/dhclient.conf /etc/dhcp/
+sudo cp -a $HOME_DIR/dns/interfaces /etc/network/
+sudo rm -f /etc/rc5.d/S02dnsmasq
+sudo rm -f /etc/rc2.d/S02dnsmasq
+sudo rm -f /etc/rc4.d/S02dnsmasq
+sudo rm -f /etc/rc3.d/S02dnsmasq
 
 echo Removing default_type in nginx.conf
-grep -v default_type /etc/nginx/nginx.conf > /tmp/nginx.conf
-mv /tmp/nginx.conf /etc/nginx/nginx.conf
-unlink /etc/nginx/sites-enabled/cs
-ln -s /etc/nginx/sites-available/cs /etc/nginx/sites-enabled/cs
+sudo grep -v default_type /etc/nginx/nginx.conf > /tmp/nginx.conf
+sudo mv /tmp/nginx.conf /etc/nginx/nginx.conf
+sudo unlink /etc/nginx/sites-enabled/cs
+sudo ln -s /etc/nginx/sites-available/cs /etc/nginx/sites-enabled/cs
 
 echo Creating directories
+sudo ln -s $WWW /var/www
 mkdir -p $WWW
 mkdir -p $WWW_DOWNLOAD
 mkdir -p $SCRATCH
 
-# chown -R www-data $WWW/data
-
 echo 'Starting nginx'
-service nginx start
+sudo service nginx start
 
 echo Configure stage is done. 

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo Adding user 'cs'
+sudo useradd cs -m
+echo Making user a sudoer
+sudo usermod -aG sudo cs
+echo Specifying password for cs user
+sudo passwd cs
+echo now please login as cs
+
