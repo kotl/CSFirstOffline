@@ -117,7 +117,7 @@ for(site of sites) {
         if (parsedUrl.pathname.endsWith(ext)) {
           var file = generateFilename(url);
           var dir = path.dirname(file);
-          stream.write(`mkdir -p '${dir}'\nwget '${url}' -o '${file}'\n`);
+          stream.write(`mkdir -p '${dir}'\nwget -c -nc '${url}' -O '${file}'\n`);
           console.log("Save later: " + url);
           return false;
         }
