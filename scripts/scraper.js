@@ -102,7 +102,7 @@ for(site of sites) {
       }
       for (d of excludeDirectories) {
         if (parsedUrl.pathname.startsWith(d)) {
-          console.log("Rejecting directory: " + url);
+          // console.log("Rejecting directory: " + url);
           return false;
         }
       }

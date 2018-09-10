@@ -7,12 +7,13 @@ sudo localectl set-locale LANG=en_CA.UTF-8
 cd $HOME_DIR
 git pull && git submodule init && git submodule update && git submodule status
 
-echo Configuring node repo
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-
 echo HOME set at $HOME_DIR
 echo 'Updating apt-get'
 sudo apt-get -y update
+sudo apt-get install curl
+
+echo Configuring node repo
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 echo 'Installing packages'
 sudo apt-get -y install nodejs npm ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
