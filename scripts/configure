@@ -22,8 +22,9 @@ echo 'Get node scratch deps'
 cd $HOME_DIR/scratch-gui
 npm install
 
-echo Installing web scraper globally
-sudo npm install website-scraper -g
+echo Installing web scraper
+cd $HOME_DIR/scripts
+npm install website-scraper
 
 cd $HOME_DIR
 
