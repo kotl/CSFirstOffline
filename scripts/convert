@@ -3,23 +3,18 @@
 source cs_dirs
 
 mkdir -p $SCRATCH/projects
+rm -rf $SCRATCH/projects/*
 
 echo scanning all downloaded data
-
 find $WWW_DOWNLOAD/csfirst.withgoogle.com/ -type f -exec grep scratch.mit.edu/projects/ {} \; \
- | grep -o -E 'http://scratch.mit.edu/projects/[0-9]+' | sort -u > $SCRATCH/projects/links.txt
+ | grep -o -E 'http://scratch.mit.edu/projects/[0-9]+' | sort -u > $HOME_DIR/projects/links.txt
 
-cp $SCRATCH/projects/links.txt /tmp/missing.txt
-cp $SCRATCH/projects/links.txt $HOME_DIR/projects/
+cp -a $HOME_DIR/projects/* $SCRATCH/projects/
 
-echo converting all existing projects
-# Deleting all existing first
-cp $HOME_DIR/projects/index.html $SCRATCH/projects/
+cd $SCRATCH/projects
+find . -type d |grep "./"| sed -e "s|./|http://scratch.mit.edu/projects/|" | sort -u > existing_links.txt
 
-for f in $HOME_DIR/projects/*.sb2
-do
-  # TODO: determine missing projects
-done
+diff existing_links.txt $HOME_DIR/projects/links.txt |grep ">" | sed -e "s/> //" > $HOME_DIR/projects/missing.txt
 
-# echo Missing projects:
-# cat $SCRATCH/projects/missing.txt
+echo Missing projects:
+cat $HOME_DIR/projects/missing.txt
