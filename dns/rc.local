@@ -24,8 +24,10 @@ if [ "$_IP" ]; then
   echo "Stopping dnsmasq, just in case"
   service dnsmasq stop
 else
+  service network-manager stop
   echo "No ip selected, stopping dhclient, starting dnsmasq"
   dhclient -x
+  sleep 10
   ifconfig eth0 172.31.254.254 netmask 255.255.255.0 broadcast 172.31.254.255
   service dnsmasq start
 fi
