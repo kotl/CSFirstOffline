@@ -16,7 +16,7 @@ node $HOME_DIR/scripts/scraper.js
 cd $WWW_DOWNLOAD/cs/sites
 bash ../download.sh
 
-cd $WWW_DOWNLOAD/cs
+cd $WWW_DOWNLOAD
 mv cs/sites/* ./
 
 # WGET_SINGLE="$WGET_BIN -r -l 1"

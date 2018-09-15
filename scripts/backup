@@ -1,0 +1,10 @@
+#!/bin/bash
+source cs_dirs
+
+mkdir -p ~/backup
+
+cd $WWW_DOWNLOAD
+
+echo Full backup started, watch ~/backup for results and log file
+tar -cvjSf ~/backup/cs.tar.bz2 . > ~/backup/cs.log
+echo Done

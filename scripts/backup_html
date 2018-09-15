@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source cs_dirs
+
+mkdir -p ~/backup
+
+cd $WWW_DOWNLOAD
+
+echo Html only backup started, watch ~/backup for results and log file
+tar -cvjSf ~/backup/cs_html_only.tar.bz2 --exclude='*.mp4' --exclude='*.mp3' --exclude='*.png' --exclude='*.jpg' --exclude='*.svg' --exclude='*.vtt' --exclude='*.wav' . > ~/backup/cs_html_only.log
+echo Done
