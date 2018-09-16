@@ -1,33 +1,17 @@
 var scrape = require('website-scraper');
 var path = require('path');
 var fs = require('fs');
-
+var domains = require('./domains').domains;
 var stream = fs.createWriteStream("cs/download.sh");
 
 var sites = [
-/* { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
+ { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
  { urls: ["http://www.google.com/js/google.js"], recursive: false},
  { urls: ["http://www.google.com/js/maia.js"], recursive: false},
  { urls: ["http://js-agent.newrelic.com/nr-632.min.js"], recursive: false},
  { urls: ["http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300"], recursive: false},
- { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},*/
+ { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},
   { urls: ["https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html"], recursive: true, maxRecursiveDepth: 5},
-//  { urls: ["https://csfirst.withgoogle.com/c/cs-first/en/storytelling/dialogue/introduction-to-dialogue-and-sequencing.html"], 
-//    recursive: true, maxRecursiveDepth: 2},
-];
-
-var domains = [
-  "csfirst.withgoogle.com",
-  "www.cs-first.com",
-  "cs-first.com",
-  "files.cs-first.com",
-  "fonts.googleapis.com",
-  "ajax.googleapis.com",
-  "storage.googleapis.com",
-  "fonts.gstatic.com",
-  "apis.google.com",
-  "ssl.gstatic.com",
-  "csfirst-files.storage.googleapis.com",
 ];
 
 var excludeDirectories = [
@@ -50,9 +34,6 @@ var options = {
   urls: ['http://nodejs.org/'],
   directory: '/path/to/save/',
 };
-
-// var x = new URL(" http://www.google.com/css/maia.experimental.css").pathname;
-// x.substring(x.lastIndexOf("/")+1)
 
 var wrongDomains = {};
 
