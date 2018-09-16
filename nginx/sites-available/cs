@@ -2,11 +2,6 @@ server {
         server_name _;
         server_name_in_redirect off;
         root /var/www;
-    location ~ \.php$ {
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
-            fastcgi_index index.php;
-            include fastcgi_params;
-    }
 }
 
 server {
@@ -36,6 +31,46 @@ server {
 server {
         server_name www.cs-first.com;
         root /var/www/cs/www.cs-first.com;
+}
+
+server {
+        server_name ajax.googleapis.com;
+        root /var/www/cs/ajax.googleapis.com;
+}
+
+server {
+        server_name apis.google.com;
+        root /var/www/cs/apis.google.com;
+}
+
+server {
+        server_name csfirst-files.storage.googleapis.com;
+        root /var/www/cs/csfirst-files.storage.googleapis.com;
+}
+
+server {
+        server_name csfirst.withgoogle.com;
+        root /var/www/cs/csfirst.withgoogle.com;
+}
+
+server {
+        server_name fonts.gstatic.com;
+        root /var/www/cs/;
+}
+
+server {
+        server_name ssl.gstatic.com;
+        root /var/www/cs/ssl.gstatic.com;
+}
+
+server {
+        server_name storage.googleapis.com;
+        root /var/www/cs/storage.googleapis.com;
+}
+
+server {
+        server_name support.google.com;
+        root /var/www/cs/support.google.com;
 }
 
 server {
