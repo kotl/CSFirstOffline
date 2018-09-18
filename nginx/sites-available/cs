@@ -16,99 +16,21 @@ server {
       location /css {
             try_files $uri /css.php?$args;
       }
-    location ~ \.php$ {
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
-            fastcgi_index index.php;
-            include fastcgi_params;
-    }
 }
 
 server {
-        server_name www.google.com;
+        server_name www.google.local;
         root /var/www/cs/www.google.com;
 }
-    
-server {
-        server_name www.cs-first.com;
-        root /var/www/cs/www.cs-first.com;
-}
 
 server {
-        server_name ajax.googleapis.com;
-        root /var/www/cs/ajax.googleapis.com;
+        server_name scratch.local;
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
 }
 
-server {
-        server_name apis.google.com;
-        root /var/www/cs/apis.google.com;
-}
-
-server {
-        server_name csfirst-files.storage.googleapis.com;
-        root /var/www/cs/csfirst-files.storage.googleapis.com;
-}
-
-server {
-        server_name csfirst.withgoogle.com;
-        root /var/www/cs/csfirst.withgoogle.com;
-}
-
-server {
-        server_name fonts.gstatic.com;
-        root /var/www/cs/;
-}
-
-server {
-        server_name ssl.gstatic.com;
-        root /var/www/cs/ssl.gstatic.com;
-}
-
-server {
-        server_name storage.googleapis.com;
-        root /var/www/cs/storage.googleapis.com;
-}
-
-server {
-        server_name support.google.com;
-        root /var/www/cs/support.google.com;
-}
-
-server {
-        server_name cs-first.com;
-        root /var/www/cs/cs-first.com;
-}
-
-server {
-        server_name files.cs-first.com;
-        root /var/www/cs/files.cs-first.com;
-}
-
-server {
-        server_name scratch.mit.edu;
-        root /var/www/scratch;
-
-location / {
-            try_files $uri $uri/ /cloud.php?$args;
-}
-
-    location ~ \.php$ {
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
-            fastcgi_index index.php;
-            include fastcgi_params;
-    }
-}
-
-server {
-        server_name www.scratch.mit.edu;
-        root /var/www/scratch;
-
-location / {
-            try_files $uri $uri/ /cloud.php?$args;
-}
-
-    location ~ \.php$ {
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
-            fastcgi_index index.php;
-            include fastcgi_params;
-    }
-}
+{SERVERS}

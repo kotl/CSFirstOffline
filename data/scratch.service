@@ -1,0 +1,12 @@
+[Unit]
+Description=Scratch NodeJS service
+[Service]
+PIDFile=/tmp/scratch-99.pid
+User={USER}
+Group={USER}
+Restart=always
+KillSignal=SIGQUIT
+WorkingDirectory={DIR}
+ExecStart={DIR}/serve-prod
+[Install]
+WantedBy=multi-user.target
