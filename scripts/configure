@@ -40,7 +40,11 @@ echo Copying nginx config over to /etc/nginx/
 sudo cp -a $HOME_DIR/nginx/* /etc/nginx/
 
 echo generate new nginx and expressjs/scratch config
-sudo cp $HOME_DIR/data/service.scratch /etc/systemd/system/
+sudo cp $HOME_DIR/data/scratch.service /etc/systemd/system/
+
+echo 'Copy dns configs'
+sudo cp -a $HOME_DIR/data/cs.conf /etc/dnsmasq.d/
+
 sudo node $HOME_DIR/scripts/gen_web_configs.js
 sudo systemctl enable scratch.service
 sudo systemctl start scratch.service

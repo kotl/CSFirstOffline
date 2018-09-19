@@ -3,7 +3,7 @@ var path = require('path');
 var domains = require('./domains').domains;
 var replace = require('replace-in-file');
 var username = process.env.SUDO_USER;
-var dir = process.cwd();
+var dir = path.dirname(process.cwd())+'/scratch-gui';
 
 var scratch = {
   files: ['/etc/systemd/system/scratch.service'],
@@ -12,20 +12,30 @@ var scratch = {
 };
 
 var servers = "";
+var dns = "";
 
 for (domain of domains) {
   var newDomain = domain.substring(0, domain.length - 4) + '.local';
   servers += "server {\n";
-  servers += `         server_name ${newDomain}\n`;
-  servers += `         root /var/www/cs/${domain}\n`;
+  servers += `         server_name ${newDomain};\n`;
+  servers += `         root /var/www/cs/${domain};\n`;
   servers += '}\n\n';
-}
 
+  dns += `address=/${domain}/172.31.254.254\n`;
+  dns += `address=/${newDomain}/172.31.254.254\n`;
+
+}
 
 var nginx = {
   files: ['/etc/nginx/sites-available/cs'],
   from: "{SERVERS}", 
   to: servers,
+};
+
+var dns = {
+  files: ['/etc/dnsmasq.d/cs.conf'],
+  from: "{DNS}",
+  to: dns,
 };
 
 var replacer = (options) => {
@@ -41,3 +51,4 @@ var replacer = (options) => {
 
 replacer(scratch);
 replacer(nginx);
+replacer(dns);
