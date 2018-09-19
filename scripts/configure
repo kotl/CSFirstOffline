@@ -16,10 +16,7 @@ echo Configuring node repo
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 echo 'Installing packages'
-sudo apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq python-setuptools python-dev
-
-echo 'Installing pip'
-sudo easy_install pip
+sudo apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
 
 echo 'Get node scratch deps'
 cd $HOME_DIR/scratch-gui
