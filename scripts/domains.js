@@ -4,13 +4,13 @@ const DOMAINS = [
   "www.cs-first.com",
   "cs-first.com",
   "files.cs-first.com",
+  "js-agent.newrelic.com",
   "fonts.googleapis.com",
   "ajax.googleapis.com",
   "storage.googleapis.com",
   "fonts.gstatic.com",
   "apis.google.com",
   "ssl.gstatic.com",
-  "support.google.com",
   "csfirst-files.storage.googleapis.com",
 ];
 
