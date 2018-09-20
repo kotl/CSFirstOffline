@@ -24,8 +24,22 @@ var mediaExtensions = [
     'ico',
 ];
 
-var searchStrings = ['https:', 'https://scratch.mit.edu', 'http://scratch.mit.edu', 'https://www.google.com'];
-var replaceStrings = ['http:', 'http://scratch.local', 'http://scratch.local','http://www.google.local'];
+var searchStrings = [
+    'https://scratch.mit.edu/projects/(.*?)/#editor',
+    'http://scratch.mit.edu/projects/(.*?)/#editor',
+    'https:', 
+    'https://scratch.mit.edu', 
+    'http://scratch.mit.edu', 
+    'https://www.google.com',
+];
+var replaceStrings = [
+    'http://scratch.local/#project$1"',
+    'http://scratch.local/#project$1"',
+    'http:', 
+    'http://scratch.local', 
+    'http://scratch.local',
+    'http://www.google.local',
+];
 
 var searchRegexes = [];
 
@@ -64,7 +78,7 @@ var processFiles = function (err, files)  {
 };
 
 FileHound.create()
-  .path('../www/cs')
+  .path('./')
   .ext(mediaExtensions)
   .not()
   .find((err, files) => {
