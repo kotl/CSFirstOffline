@@ -8,10 +8,11 @@ var sites = [
  { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
  { urls: ["http://www.google.com/js/google.js"], recursive: false},
  { urls: ["http://www.google.com/js/maia.js"], recursive: false},
- { urls: ["http://js-agent.newrelic.com/nr-632.min.js"], recursive: false},
+/* { urls: ["http://js-agent.newrelic.com/nr-632.min.js"], recursive: false},
  { urls: ["http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300"], recursive: false},
- { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},
-  { urls: ["https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html"], recursive: true, maxRecursiveDepth: 5},
+ { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},*/
+  { urls: ["https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", "https://csfirst.withgoogle.com"],
+   recursive: true, maxRecursiveDepth: 5},
 ];
 
 var excludeDirectories = [
@@ -33,6 +34,7 @@ var externalDownloadExtensions = [
 var options = {
   urls: ['http://nodejs.org/'],
   directory: '/path/to/save/',
+  updateMissingSources: true,  
 };
 
 var wrongDomains = {};
@@ -102,7 +104,7 @@ for(site of sites) {
           return false;
         }
       }
-      // console.log("Start: " + url);
+      console.log("Start: " + url);
       return true;
     };
   }
