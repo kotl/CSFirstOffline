@@ -4,6 +4,4 @@ SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 HOME_DIR=$( dirname "${SCRIPT_DIR}" )
 WWW=$HOME_DIR/www
 
-CS=$WWW/cs
 WWW_DOWNLOAD=$WWW/cs
-CLOUD=$WWW/cloud
