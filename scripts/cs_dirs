@@ -6,5 +6,4 @@ WWW=$HOME_DIR/www
 
 CS=$WWW/cs
 WWW_DOWNLOAD=$WWW/cs
-SCRATCH=$WWW/scratch
 CLOUD=$WWW/cloud

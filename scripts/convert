@@ -2,16 +2,12 @@
 
 source cs_dirs
 
-mkdir -p $SCRATCH/projects
-rm -rf $SCRATCH/projects/*
+cd $HOME_DIR/projects
 
 echo scanning all downloaded data
 find $WWW_DOWNLOAD/csfirst.withgoogle.com/ -type f -exec grep scratch.mit.edu/projects/ {} \; \
  | grep -o -E 'http://scratch.mit.edu/projects/[0-9]+' | sort -u > $HOME_DIR/projects/links.txt
 
-cp -a $HOME_DIR/projects/* $SCRATCH/projects/
-
-cd $SCRATCH/projects
 find . -type d |grep "./"| sed -e "s|./|http://scratch.mit.edu/projects/|" | sort -u > existing_links.txt
 
 diff existing_links.txt $HOME_DIR/projects/links.txt |grep ">" | sed -e "s/> //" > $HOME_DIR/projects/missing.txt

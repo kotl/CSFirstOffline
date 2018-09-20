@@ -76,7 +76,6 @@ echo Creating directories
 sudo ln -s $WWW /var/www
 mkdir -p $WWW
 mkdir -p $WWW_DOWNLOAD
-mkdir -p $SCRATCH
 
 echo 'Starting nginx'
 sudo service nginx start
