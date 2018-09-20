@@ -14,3 +14,4 @@ diff existing_links.txt $HOME_DIR/projects/links.txt |grep ">" | sed -e "s/> //"
 
 echo Missing projects:
 cat $HOME_DIR/projects/missing.txt
+

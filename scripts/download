@@ -13,6 +13,9 @@ rm -rf $WWW_DOWNLOAD
 node $HOME_DIR/scripts/scraper.js
 
 cd $WWW_DOWNLOAD
+node $HOME_DIR/scripts/mirror.js
+
+cd $WWW_DOWNLOAD
 bash ../download.sh
 
 
