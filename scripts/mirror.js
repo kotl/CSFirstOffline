@@ -24,16 +24,19 @@ var mediaExtensions = [
     'ico',
 ];
 
-var searchStrings = ['https:', 'scratch.mit.edu', 'www.google.com'];
-var replaceStrings = ['http:', 'scratch.local', 'www.google.local'];
+var searchStrings = ['https:', 'https://scratch.mit.edu', 'http://scratch.mit.edu', 'https://www.google.com'];
+var replaceStrings = ['http:', 'http://scratch.local', 'http://scratch.local','http://www.google.local'];
 
 var searchRegexes = [];
 
 for (domain of domains) {
   if (domain.endsWith('.com')) {
     var newDomain = domain.substring(0, domain.length - 4) + '.local';
-    searchStrings.push(domain); 
-    replaceStrings.push(newDomain);
+    searchStrings.push("http://" + domain); 
+    replaceStrings.push("http://" + newDomain);
+
+    searchStrings.push("https://" + domain); 
+    replaceStrings.push("http://" + newDomain);
   }
 }
 
