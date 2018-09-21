@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
     "filehound": "^1.16.4",
     "replace-in-file": "^3.4.2",
-    "website-scraper": "^3.3.7"
+    "website-scraper": "git+https://github.com/kotl/node-website-scraper.git"
   }
 }
