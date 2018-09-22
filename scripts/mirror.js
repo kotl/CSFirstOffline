@@ -32,6 +32,7 @@ var searchStrings = [
     'https://scratch.mit.edu', 
     'http://scratch.mit.edu', 
     'https://www.google.com',
+    "'//www.google-analytics.com",
 ];
 var replaceStrings = [
     'http://scratch.local/#project$1"',
@@ -41,6 +42,7 @@ var replaceStrings = [
     'http://scratch.local', 
     'http://scratch.local',
     'http://www.google.local',
+    "'http://www.google-analytics.local",
 ];
 
 var searchRegexes = [];

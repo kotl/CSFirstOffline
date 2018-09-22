@@ -20,6 +20,7 @@ server {
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
  	  add_header Access-Control-Allow-Origin *;
+	  add_header Content-Type text/css;
         }
 
         location /icon {
@@ -30,6 +31,7 @@ server {
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
  	  add_header Access-Control-Allow-Origin *;
+	  add_header Content-Type text/css;         
         }
 
 

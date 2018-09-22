@@ -9,6 +9,7 @@ const DOMAINS = [
   "ajax.googleapis.com",
   "storage.googleapis.com",
   "fonts.gstatic.com",
+  "www.google-analytics.com",
   "apis.google.com",
   "ssl.gstatic.com",
   "csfirst-files.storage.googleapis.com",
