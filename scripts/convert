@@ -5,8 +5,8 @@ source cs_dirs
 cd $HOME_DIR/projects
 
 echo scanning all downloaded data
-find $WWW_DOWNLOAD/csfirst.withgoogle.com/ -type f -exec grep scratch.mit.edu/projects/ {} \; \
- | grep -o -E 'http://scratch.mit.edu/projects/[0-9]+' | sort -u > $HOME_DIR/projects/links.txt
+find $WWW_DOWNLOAD/csfirst.withgoogle.com/ -type f -exec grep scratch.local/projects/ {} \; \
+ | grep -o -E 'scratch.local/projects/[0-9]+' | sed -e "s|scratch.local|scratch.mit.edu|g" | sort -u > $HOME_DIR/projects/links.txt
 
 find . -type d |grep "./"| sed -e "s|./|http://scratch.mit.edu/projects/|" | sort -u > existing_links.txt
 
