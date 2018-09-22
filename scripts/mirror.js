@@ -25,14 +25,16 @@ var mediaExtensions = [
 ];
 
 var searchStrings = [
-    'https://scratch.mit.edu/projects/(.*?)/#editor',
-    'http://scratch.mit.edu/projects/(.*?)/#editor',
+    'https://scratch.mit.edu/projects/(.*?)/',
+    'http://scratch.mit.edu/projects/(.*?)/',
+    'http://scratch.local/projects/(.*?)/',
     'https:', 
     'https://scratch.mit.edu', 
     'http://scratch.mit.edu', 
     'https://www.google.com',
 ];
 var replaceStrings = [
+    'http://scratch.local/#project$1"',
     'http://scratch.local/#project$1"',
     'http://scratch.local/#project$1"',
     'http:', 
