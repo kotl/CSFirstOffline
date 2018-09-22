@@ -19,6 +19,9 @@ for (domain of domains) {
   servers += "server {\n";
   servers += `         server_name ${newDomain};\n`;
   servers += `         root /var/www/cs/${domain};\n`;
+  servers += `  location / {\n`;
+  servers += `      add_header Access-Control-Allow-Origin *;\n`;
+  servers += `  }\n`;
   servers += '}\n\n';
 
   dns += `address=/${domain}/172.31.254.254\n`;

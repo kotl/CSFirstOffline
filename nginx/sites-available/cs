@@ -2,25 +2,48 @@ server {
         server_name _;
         server_name_in_redirect off;
         root /var/www;
-}
 
-server {
-        server_name js-agent.newrelic.com;
-        root /var/www/cs/js-agent.newrelic.com;
+    location / {
+	add_header Access-Control-Allow-Origin *;
+    }
 }
 
 server {
         server_name fonts.googleapis.com;
         root /var/www/cs/fonts.googleapis.com;
 
-      location /css {
-            try_files $uri /css.php?$args;
-      }
+        location /css {
+          proxy_pass http://localhost:3000/cgi/text_css/fonts.googleapis.com/css/?$args;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+ 	  add_header Access-Control-Allow-Origin *;
+        }
+
+        location /icon {
+          proxy_pass http://localhost:3000/cgi/text_css/fonts.googleapis.com/icon/?$args;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+ 	  add_header Access-Control-Allow-Origin *;
+        }
+
+
+
 }
 
 server {
         server_name www.google.local;
         root /var/www/cs/www.google.com;
+
+    location / {
+	add_header Access-Control-Allow-Origin *;
+    }
+
 }
 
 server {
@@ -32,6 +55,7 @@ server {
           proxy_set_header Connection 'upgrade';
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
+ 	  add_header Access-Control-Allow-Origin *;
         }
 }
 

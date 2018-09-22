@@ -8,11 +8,18 @@ var sites = [
  { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
  { urls: ["http://www.google.com/js/google.js"], recursive: false},
  { urls: ["http://www.google.com/js/maia.js"], recursive: false},
+
 /* { urls: ["http://js-agent.newrelic.com/nr-632.min.js"], recursive: false},
  { urls: ["http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300"], recursive: false},
  { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},*/
+
+//    "http://fonts.googleapis.com/css?family=Product+Sans", 
+//    "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700",
+//    "http://fonts.googleapis.com/icon?family=Material+Icons+Extended"],
+
+ { urls: ["http://google.com/favicon.ico"], recursive: false},
   { urls: ["https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", "https://csfirst.withgoogle.com"],
-   recursive: true, maxRecursiveDepth: 5},
+   recursive: true, maxRecursiveDepth: 7},
 ];
 
 var excludeDirectories = [
@@ -31,21 +38,15 @@ var externalDownloadExtensions = [
   ".mp4",
 ];
 
-var options = {
-  urls: ['http://nodejs.org/'],
-  directory: '/path/to/save/',
-  updateMissingSources: true,  
-};
-
 var wrongDomains = {};
 
 var generateFilename = function (url) {
       var parsedUrl = new URL(url);
       var lastPath = parsedUrl.pathname.substring(parsedUrl.pathname.lastIndexOf("/")+1);
       if (lastPath.indexOf(".") == -1 && parsedUrl.search == "") {
-        return parsedUrl.hostname + parsedUrl.pathname + "/index.html";
+        return parsedUrl.hostname + decodeURI(parsedUrl.pathname) + "/index.html";
       }
-      return parsedUrl.hostname + parsedUrl.pathname + parsedUrl.search;
+      return parsedUrl.hostname + decodeURI(parsedUrl.pathname) + parsedUrl.search;
 };
 
 stream.once('open', function(fd) {
@@ -62,10 +63,14 @@ for(site of sites) {
       return resource.filename;
     }
   } else {
+    options.replaceLinks = false;
     options.filenameGenerator = (resource, options, occupiedFileNames) => {
       return generateFilename(resource.url);
     }
     options.urlFilter = (url) => {
+      if (url.startsWith("//")) {
+        url = "http:" + url;
+      }
       var parsedUrl = new URL(url);
       var currentDomain = parsedUrl.host;
       var goodDomain = false;
