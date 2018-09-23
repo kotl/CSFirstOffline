@@ -24,7 +24,7 @@ npm install
 
 echo Installing web scraper
 cd $HOME_DIR/scripts
-npm install website-scraper
+npm install "git+https://github.com/kotl/node-website-scraper.git"
 
 cd $HOME_DIR
 

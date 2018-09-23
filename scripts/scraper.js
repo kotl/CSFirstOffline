@@ -2,7 +2,8 @@ var scrape = require('website-scraper');
 var path = require('path');
 var fs = require('fs');
 var domains = require('./domains').domains;
-var stream = fs.createWriteStream("./download.sh");
+var streamDownload = fs.createWriteStream("./download.sh");
+var streamMove = fs.createWriteStream("./move.sh");
 
 var sites = [
  { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
@@ -18,7 +19,10 @@ var sites = [
 //    "http://fonts.googleapis.com/icon?family=Material+Icons+Extended"],
 
  { urls: ["http://google.com/favicon.ico"], recursive: false},
-  { urls: ["https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", "https://csfirst.withgoogle.com"],
+  { urls: [
+    "https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", 
+    "https://csfirst.withgoogle.com/en/home",
+  ],
    recursive: true, maxRecursiveDepth: 7},
 ];
 
@@ -49,7 +53,6 @@ var generateFilename = function (url) {
       return parsedUrl.hostname + decodeURI(parsedUrl.pathname) + parsedUrl.search;
 };
 
-stream.once('open', function(fd) {
 
 for(site of sites) {
   console.log("Processing url: " + site.urls[0]);
@@ -104,7 +107,8 @@ for(site of sites) {
         if (parsedUrl.pathname.endsWith(ext)) {
           var file = generateFilename(url);
           var dir = path.dirname(file);
-          stream.write(`mkdir -p '${dir}'\nwget -c -nc '${url}' -O '${file}'\n`);
+          streamDownload.write(`mkdir -p '${dir}'\nwget -c -nc '${url}' -O '${file}'\n`);
+          streamMove.write(`mkdir -p $2'/${dir}'\nmv $1'/${file}' $2'/${dir}'/\n`);
           console.log("Save later: " + url);
           return false;
         }
@@ -113,7 +117,7 @@ for(site of sites) {
       return true;
     };
   }
-  options.requestConcurrency = 5;
+  options.requestConcurrency = 2;
   options.onResourceSaved =  (resource) => {
     console.log(`Done: ${resource.filename}`);
   };
@@ -126,4 +130,6 @@ for(site of sites) {
    }
  });
 }
-});
+
+
+
