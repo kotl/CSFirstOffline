@@ -9,7 +9,7 @@ server {
 }
 
 server {
-        server_name fonts.googleapis.com;
+        server_name fonts.googleapis.local;
         root /var/www/cs/fonts.googleapis.com;
 
         location /css {
@@ -41,6 +41,37 @@ server {
 server {
         server_name www.google.local;
         root /var/www/cs/www.google.com;
+
+    location / {
+	add_header Access-Control-Allow-Origin *;
+    }
+
+}
+
+server {
+        server_name www.google.com;
+        root /var/www/cs/www.google.com;
+
+    location / {
+	add_header Access-Control-Allow-Origin *;
+    }
+
+}
+
+
+server {
+        server_name google.local;
+        root /var/www/cs/google.com;
+
+    location / {
+	add_header Access-Control-Allow-Origin *;
+    }
+
+}
+
+server {
+        server_name google.com;
+        root /var/www/cs/google.com;
 
     location / {
 	add_header Access-Control-Allow-Origin *;
