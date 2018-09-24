@@ -38,6 +38,16 @@ server {
 
 }
 
+server { 
+  server_name cs.first;
+
+  rewrite ^/$
+      http://csfirst.withgoogle.local/c/cs-first/en/curriculum.html permanent;
+
+  rewrite ^/(.*)$
+      http://csfirst.withgoogle.local/$1 permanent;
+}
+
 server {
         server_name www.google.local;
         root /var/www/cs/www.google.com;
