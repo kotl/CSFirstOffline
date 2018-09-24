@@ -20,7 +20,7 @@ for (domain of domains) {
   servers += `         server_name ${newDomain};\n`;
   servers += `         root /var/www/cs/${domain};\n`;
   if (domain === 'csfirst.withgoogle.com') {
-    server += ' rewrite ^/$ http://csfirst.withgoogle.local/c/cs-first/en/curriculum.html permanent;\n';
+    servers += ' rewrite ^/$ http://csfirst.withgoogle.local/c/cs-first/en/curriculum.html permanent;\n';
   }
   servers += `  location / {\n`;
   servers += `      add_header Access-Control-Allow-Origin *;\n`;
