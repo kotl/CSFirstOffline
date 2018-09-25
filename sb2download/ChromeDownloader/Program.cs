@@ -30,6 +30,7 @@ namespace ChromeDownloader
             options.AddUserProfilePreference("profile.content_settings.exceptions.plugins.*,*.per_resource.adobe-flash-player", 1);
             // Enable Flash for this site
             options.AddUserProfilePreference("PluginsAllowedForUrls", "https://scratch.mit.edu");
+            options.AddUserProfilePreference("PluginsAllowedForUrls", "http://scratch.mit.edu");
             OpenQA.Selenium.Chrome.ChromeDriver driver = new OpenQA.Selenium.Chrome.ChromeDriver(chromeDriverPath, options);
             foreach (string line in links)
             {
@@ -39,6 +40,10 @@ namespace ChromeDownloader
                 string link = line;
                 if (!link.Contains("/#editor")) {
                     link += "/#editor";
+                }
+                if (!link.Contains("http"))
+                {
+                    link = "https://" + link;
                 }
                 Regex r= new Regex(@"/projects/(\d+)");
                 string projectNumber = r.Match(link).Groups[1].Value;
