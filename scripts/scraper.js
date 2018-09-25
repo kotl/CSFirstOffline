@@ -23,7 +23,7 @@ var sites = [
     "https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", 
     "https://csfirst.withgoogle.com/en/home",
   ],
-   recursive: true, maxRecursiveDepth: 7},
+   recursive: true, maxRecursiveDepth: 10},
 ];
 
 var excludeDirectories = [
