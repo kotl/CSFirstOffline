@@ -1,0 +1,38 @@
+#!/bin/bash
+
+apt-get update
+apt-get install -y tmux mc git
+
+useradd cs -m -s /bin/bash
+sudo usermod -aG sudo cs
+
+sudo passwd cs << "END"
+CSFirst
+CSFirst
+END
+
+cp -a /home/cs /root/
+echo "LABEL=cs /home ext4 defaults 0 1" >> /etc/fstab
+mount -a
+
+rm -rf /home/cs
+cp -a /root/cs /home/cs
+
+cat > /home/cs/init.sh << "END"
+#!/bin/bash
+git clone https://github.com/kotl/csfo.git
+cd csfo/scripts
+sudo bash ./resize
+sudo reboot
+END
+
+chmod +x /home/cs/init.sh
+
+cat > /home/cs/start.sh << "END"
+#!/bin/bash
+cd csfo/scripts
+./run_all
+END
+
+chmod +x /home/cs/start.sh
+
