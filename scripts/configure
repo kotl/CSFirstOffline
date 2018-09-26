@@ -16,7 +16,7 @@ echo Configuring node repo
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 echo 'Installing packages'
-sudo apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq
+sudo apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq net-tools
 
 echo 'Get node scratch deps'
 cd $HOME_DIR/scratch-gui
@@ -52,9 +52,6 @@ sudo node $HOME_DIR/scripts/gen_web_configs.js
 sudo systemctl enable scratch.service
 sudo systemctl start scratch.service
 
-echo 'Copy dns configs'
-sudo cp -a $HOME_DIR/data/cs.conf /etc/dnsmasq.d/
-
 echo 'Copy rc.local that determines startup mode'
 sudo cp -a $HOME_DIR/data/rc.local /etc/
 
@@ -76,7 +73,9 @@ sudo unlink /etc/nginx/sites-enabled/cs
 sudo ln -s /etc/nginx/sites-available/cs /etc/nginx/sites-enabled/cs
 
 echo Creating directories
-sudo ln -s $WWW /var/www
+sudo mkdir -p /var/www
+sudo ln -s $WWW/cs /var/www/cs
+
 mkdir -p $WWW
 mkdir -p $WWW_DOWNLOAD
 

@@ -11,25 +11,41 @@
 #
 # By default this script does nothing.
 
-# Sometimes dhclient fails during startup. Let's retry it.
-dhclient -x
-dhclient -v eth0
+LOG=/tmp/rc.local.log
 
 # Print the IP address
 _IP=$(hostname -I | grep -v 172.31.254.254) || true
 
 if [ "$_IP" ]; then
-  printf "My IP address is %s\n" "$_IP"
-  echo ""
-  echo "Stopping dnsmasq, just in case"
-  service dnsmasq stop
+  printf "My IP address was set right away to %s\n" "$_IP" >> $LOG
 else
-  service network-manager stop
-  echo "No ip selected, stopping dhclient, starting dnsmasq"
+  # Sometimes dhclient fails during startup. Let's retry it.
+  echo 'No ip defined. Let us retry dhclient:' `date` >> $LOG
+  sleep 2
   dhclient -x
-  sleep 10
-  ifconfig eth0 172.31.254.254 netmask 255.255.255.0 broadcast 172.31.254.255
-  service dnsmasq start
+  sleep 2
+  dhclient -v eth0
+fi
+
+_IP=$(hostname -I | grep -v 172.31.254.254) || true
+
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP" >> $LOG
+  echo ""
+  echo "Stopping dnsmasq, just in case" >> $LOG
+  service dnsmasq stop >> $LOG 2>> $LOG
+else
+  echo "Starting Offline config: " `date` >> $LOG
+  service network-manager stop >> $LOG 2>> $LOG
+  echo "No ip selected, stopping dhclient, starting dnsmasq" >> $LOG
+  dhclient -x >> $LOG 2>> $LOG
+  sleep 5
+  ifconfig eth0 172.31.254.254 netmask 255.255.255.0 broadcast 172.31.254.255 >> $LOG 2>> $LOG
+  sleep 15
+  service dnsmasq start >> $LOG 2>> $LOG
+  sleep 5
+  ifconfig >> $LOG 2>> $LOG
+  echo "End Offline config" `date`  >> $LOG
 fi
 
 exit 0
