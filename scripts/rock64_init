@@ -1,0 +1,21 @@
+#!/bin/bash
+
+apt-get update
+apt-get install -y tmux mc git
+
+useradd cs -m -s /bin/bash
+usermod -aG sudo cs
+
+passwd cs << "END"
+CSFirst
+CSFirst
+END
+
+cat > /home/cs/start.sh << "END"
+#!/bin/bash
+git clone https://github.com/kotl/csfo.git
+cd csfo/scripts
+./run_all
+END
+
+chmod +x /home/cs/start.sh

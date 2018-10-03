@@ -4,9 +4,9 @@ apt-get update
 apt-get install -y tmux mc git
 
 useradd cs -m -s /bin/bash
-sudo usermod -aG sudo cs
+usermod -aG sudo cs
 
-sudo passwd cs << "END"
+passwd cs << "END"
 CSFirst
 CSFirst
 END
