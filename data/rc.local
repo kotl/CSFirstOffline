@@ -34,8 +34,12 @@ if [ "$_IP" ]; then
   echo ""
   echo "Stopping dnsmasq, just in case" >> $LOG
   service dnsmasq stop >> $LOG 2>> $LOG
+  systemctl enable systemd-resolved
+  systemctl start systemd-resolved
 else
   echo "Starting Offline config: " `date` >> $LOG
+  systemctl stop systemd-resolved
+  systemctl disable systemd-resolved
   service network-manager stop >> $LOG 2>> $LOG
   echo "No ip selected, stopping dhclient, starting dnsmasq" >> $LOG
   dhclient -x >> $LOG 2>> $LOG
