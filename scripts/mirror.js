@@ -39,8 +39,8 @@ var replaceStrings = [
 //    'http://scratch.local/#project$1"',
 //    'http://scratch.local/#project$1"',
     'http:', 
-    'http://scratch.local', 
-    'http://scratch.local',
+    'http://scratch.mit.local', 
+    'http://scratch.mit.local',
     'http://www.google.local',
     "'http://www.google-analytics.local",
 ];
