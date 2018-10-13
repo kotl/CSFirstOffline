@@ -4,19 +4,23 @@ var fs = require('fs');
 var domains = require('./domains').domains;
 var streamDownload = fs.createWriteStream("./download.sh");
 var streamMove = fs.createWriteStream("./move.sh");
+var generateFilename = require('./generate_file').generateFilename;
 
 var sites = [
  { urls: ["http://www.google.com/css/maia.experimental.css"], recursive: false},
  { urls: ["http://www.google.com/js/google.js"], recursive: false},
  { urls: ["http://www.google.com/js/maia.js"], recursive: false},
 
-/* { urls: ["http://js-agent.newrelic.com/nr-632.min.js"], recursive: false},
- { urls: ["http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300"], recursive: false},
- { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},*/
+ { urls: ["http://js-agent.newrelic.com/nr-632.min.js"], recursive: false},
 
-//    "http://fonts.googleapis.com/css?family=Product+Sans", 
-//    "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700",
-//    "http://fonts.googleapis.com/icon?family=Material+Icons+Extended"],
+ { urls: ["http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/css?family=Material+Icons"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/css?family=Roboto"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/css?family=Product+Sans"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"], recursive: false},
+ { urls: ["http://fonts.googleapis.com/icon?family=Material+Icons+Extended"], recursive: false}
 
  { urls: ["http://google.com/favicon.ico"], recursive: false},
   { urls: [
@@ -24,6 +28,7 @@ var sites = [
     "https://csfirst.withgoogle.com/en/home",
   ],
    recursive: true, maxRecursiveDepth: 10},
+
 ];
 
 var excludeDirectories = [

@@ -11,6 +11,7 @@ cd $WWW
 rm -rf $WWW_DOWNLOAD
 
 node --max-old-space-size=3072 $HOME_DIR/scripts/scraper.js
+node --max-old-space-size=3072 $HOME_DIR/scripts/download_css_fonts.js
 
 cd $WWW_DOWNLOAD
 node --max-old-space-size=3072 $HOME_DIR/scripts/mirror.js
@@ -19,4 +20,5 @@ mkdir $WWW_DOWNLOAD/www.google-analytics.com
 cp $HOME_DIR/data/analytics.js $WWW_DOWNLOAD/www.google-analytics.com/
 
 cd $WWW_DOWNLOAD
+bash ../download_fonts.sh
 bash ../download.sh
