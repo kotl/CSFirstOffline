@@ -18,6 +18,8 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 echo 'Installing packages'
 sudo apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev libssl-dev mc dnsmasq net-tools
 
+export NODE_ENV=production
+
 echo 'Get node scratch-gui deps and build it'
 cd $HOME_DIR/scratch-gui
 npm install

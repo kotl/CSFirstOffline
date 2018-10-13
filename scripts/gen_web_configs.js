@@ -23,6 +23,7 @@ for (domain of domains) {
     servers += ' rewrite ^/$ http://csfirst.withgoogle.local/c/cs-first/en/curriculum.html permanent;\n';
   }
   servers += `  location / {\n`;
+  servers += `      expires 1w;\n`;
   servers += `      add_header Access-Control-Allow-Origin *;\n`;
   servers += `  }\n`;
   servers += '}\n\n';
