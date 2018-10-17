@@ -25,6 +25,10 @@ cd $HOME_DIR/scratch-gui
 npm install
 npm run build
 
+echo 'Get node scratch-gui assets'
+cd $HOME_DIR/scratch-gui/assets
+node getassets.js
+
 echo 'Get node scratch gui admin deps and build it'
 cd $HOME_DIR/scratch-gui/admin
 npm install
