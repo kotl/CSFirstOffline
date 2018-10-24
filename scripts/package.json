@@ -7,6 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "css-url-parser": "^1.1.3",
     "filehound": "^1.16.4",
     "replace-in-file": "^3.4.2",
     "website-scraper": "git+https://github.com/kotl/node-website-scraper.git"

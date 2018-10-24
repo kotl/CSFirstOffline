@@ -37,10 +37,12 @@ if [ "$_IP" ]; then
   systemctl enable systemd-resolved
   systemctl start systemd-resolved
 else
-  echo "Starting Offline config: " `date` >> $LOG
   systemctl stop systemd-resolved
   systemctl disable systemd-resolved
+  echo "Starting Offline config: " `date` >> $LOG
   service network-manager stop >> $LOG 2>> $LOG
+  echo "Stopping ssh: " `date` >> $LOG
+  service ssh stop >> $LOG 2>> $LOG
   echo "No ip selected, stopping dhclient, starting dnsmasq" >> $LOG
   dhclient -x >> $LOG 2>> $LOG
   sleep 5
