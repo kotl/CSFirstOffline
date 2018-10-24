@@ -66,7 +66,7 @@ for(site of sites) {
       return resource.filename;
     }
   } else {
-    options.replaceLinks = false;
+    options.updateSources = false;
     options.filenameGenerator = (resource, options, occupiedFileNames) => {
       return generateFilename(resource.url);
     }
