@@ -21,11 +21,11 @@ sudo apt-get -y install nodejs ffmpeg nginx emacs tmux mc locate libpam0g-dev li
 echo 'CONFIGURE: Get node scratch-gui deps and build it'
 cd $HOME_DIR/scratch-gui
 npm install
-if [ $? -eq 0 ]
+if [ $? -ne 0 ]
 then
   echo 'CONFIGURE: Try again'
   npm install
-  if [ $? -eq 0 ]
+  if [ $? -ne 0 ]
   then
     echo 'CONFIGURE: And again'
     npm install
@@ -43,11 +43,11 @@ node getassets.js
 echo 'CONFIGURE: Get node scratch gui admin deps and build it'
 cd $HOME_DIR/scratch-gui/admin
 npm install
-if [ $? -eq 0 ]
+if [ $? -ne 0 ]
 then
   echo 'CONFIGURE: Try again'
   npm install
-  if [ $? -eq 0 ]
+  if [ $? -ne 0 ]
   then
     echo 'CONFIGURE: And again'
     npm install
