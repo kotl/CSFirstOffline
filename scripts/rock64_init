@@ -2,16 +2,17 @@
 
 # How to use this script to initialize rock64 board:
 #
-# 1. Download and flash Bionic minimal 64-bit image eMMC boot from here:
-# http://wiki.pine64.org/index.php/ROCK64_Software_Release#Ubuntu_18.04_Bionic_minimal_64bit_Image_.5BmicroSD_.2F_eMMC_Boot.5D_.5B0.7.8.5D
+# 1. Download and flash Debian Stretch eMMC boot from here:
+# http://wiki.pine64.org/index.php/ROCK64_Software_Release#Debian_Stretch_Minimal_64bit_OS_Image_.5BmicroSD_.2F_eMMC_Boot.5D_.5B0.7.8.5D
 # 2. Boot it and ssh to it: ssh rock64@IP_ADDRESS_OF_THE_BOARD
 # 3. Login as rock64/rock64
 # 4. Copy paste this script using 'cat > init.sh' command, for example.
 # 5. Run this script using 'sudo bash ./init.sh'
 # 6. Log out and ssh using: ssh cs@IP_ADDRESS_OF_THE_BOARD (password will be 'CSFirst')
-# 7. Start tmux
-# 8. run ./start.sh and use 'CSFirst' password from time to time when sudo asks for it.
-# 9. This will take a very long time...
+# 7. run 'export LANG=C.UTF-8'
+# 8. run 'tmux'
+# 9. inside tmux session, run './start.sh' and use 'CSFirst' password from time to time when sudo asks for it.
+# This will take a very long time...
 
 apt-get update
 apt-get install -y tmux mc git gyp
