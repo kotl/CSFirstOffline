@@ -23,6 +23,8 @@ export NODE_ENV=production
 echo 'Get node scratch-gui deps and build it'
 cd $HOME_DIR/scratch-gui
 npm install
+echo 'Lets run install again just in case'
+npm install
 npm run build
 
 echo 'Get node scratch-gui assets'
@@ -31,6 +33,8 @@ node getassets.js
 
 echo 'Get node scratch gui admin deps and build it'
 cd $HOME_DIR/scratch-gui/admin
+npm install
+echo 'Lets run install again just in case'
 npm install
 npm run build
 
