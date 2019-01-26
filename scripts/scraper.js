@@ -26,15 +26,6 @@ var sites = [
   { urls: [
     "https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", 
     "https://csfirst.withgoogle.com/en/home",
-
-    "https://csfirst.withgoogle.com/c/cs-first/fr/curriculum.html", 
-    "https://csfirst.withgoogle.com/fr/home",
-
-    "https://csfirst.withgoogle.com/c/cs-first/it/curriculum.html", 
-    "https://csfirst.withgoogle.com/it/home",
-   
-    "https://csfirst.withgoogle.com/c/cs-first/de/curriculum.html", 
-    "https://csfirst.withgoogle.com/de/home",
   ],
    recursive: true, maxRecursiveDepth: 10},
 
