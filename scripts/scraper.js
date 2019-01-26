@@ -25,7 +25,7 @@ var sites = [
  { urls: ["http://google.com/favicon.ico"], recursive: false},
   { urls: [
     "https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", 
-    "https://csfirst.withgoogle.com/en/home",
+    "https://csfirst.withgoogle.com/en/home"
   ],
    recursive: true, maxRecursiveDepth: 10},
 
