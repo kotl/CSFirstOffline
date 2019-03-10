@@ -2,3 +2,4 @@ scripts/data
 log.txt
 node_modules
 www/
+projects/geckodriver
