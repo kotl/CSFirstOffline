@@ -24,21 +24,23 @@ function deleteTempFiles() {
     }
 }
 
-function processResults(url) {
+function getDestDir(url) {
+    const myURL = new URL(url);
+    return __dirname + '/' + path.basename(path.dirname(myURL.pathname));
+}
+
+function processResults(destDir) {
   var items = fs.readdirSync(TEMP_DIR);
   if (items.length === 1) {
     var item = `${TEMP_DIR}/${items[0]}`;
     console.log('PROCESSING: ' + item);
-    const myURL = new URL(url);
-    var destDir = __dirname + '/' + path.basename(path.dirname(myURL.pathname));
     if (!fs.existsSync(destDir)) {
       fs.mkdirSync(destDir);
+      var name = path.basename(items[0], '.sb3');
+      fs.renameSync(item, destDir + '/index.sb3');
+      fs.writeFileSync(destDir + '/name.txt', name);
+      fs.writeFileSync(destDir + '/' + name + '.txt', '');
     }
-
-    var name = path.basename(items[0], '.sb3');
-    fs.renameSync(item, destDir + '/index.sb3');
-    fs.writeFileSync(destDir + '/name.txt', name);
-    fs.writeFileSync(destDir + '/' + name + '.txt', '');
     deleteTempFiles();
    } else {
     console.log("Error: wrong number of items in the temp directory:" + items.length);
@@ -54,15 +56,20 @@ function processResults(url) {
     deleteTempFiles();
     for (urlbase of urls) {
       const url = `https://${urlbase}/editor`;
-      console.log("LOADING: " + url);
-      await driver.get(url); 
-      await driver.sleep(BASE_DELAY);
-      await driver.wait(until.elementLocated(By.xpath("//span[text()='File']")), BASE_DELAY*4);
-      await driver.findElement(By.xpath("//span[text()='File']")).click();
-      await driver.wait(until.elementLocated(By.xpath("//span[text()='Save to your computer']")), BASE_DELAY*2);
-      await driver.findElement(By.xpath("//span[text()='Save to your computer']")).click();
-      await driver.sleep(BASE_DELAY*3);
-      processResults(url);
+      var destDir = getDestDir(url);
+      if (!fs.existsSync(destDir)) {
+        console.log("LOADING: " + url);
+        await driver.get(url); 
+        await driver.sleep(BASE_DELAY);
+        await driver.wait(until.elementLocated(By.xpath("//span[text()='File']")), BASE_DELAY*4);
+        await driver.findElement(By.xpath("//span[text()='File']")).click();
+        await driver.wait(until.elementLocated(By.xpath("//span[text()='Save to your computer']")), BASE_DELAY*2);
+        await driver.findElement(By.xpath("//span[text()='Save to your computer']")).click();
+        await driver.sleep(BASE_DELAY*3);
+        processResults(destDir);
+      } else {
+        console.log('SKIPPING, ALREADY EXISTS:' + destDir);
+      }
     }
   } finally {
     await driver.quit();
