@@ -20,12 +20,12 @@ var sites = [
  { urls: ["http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700"], recursive: false},
  { urls: ["http://fonts.googleapis.com/css?family=Product+Sans"], recursive: false},
  { urls: ["http://fonts.googleapis.com/css?family=Roboto:300,400,500,700"], recursive: false},
- { urls: ["http://fonts.googleapis.com/icon?family=Material+Icons+Extended"], recursive: false}
+ { urls: ["http://fonts.googleapis.com/icon?family=Material+Icons+Extended"], recursive: false},
 
  { urls: ["http://google.com/favicon.ico"], recursive: false},
   { urls: [
     "https://csfirst.withgoogle.com/c/cs-first/en/curriculum.html", 
-    "https://csfirst.withgoogle.com/en/home",
+    "https://csfirst.withgoogle.com/en/home"
   ],
    recursive: true, maxRecursiveDepth: 10},
 
