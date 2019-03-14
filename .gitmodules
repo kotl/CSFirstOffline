@@ -1,6 +1,3 @@
-[submodule "scratch-gui"]
-	path = scratch-gui
-	url = https://github.com/kotl/scratch-gui
 [submodule "node-website-scraper"]
 	path = node-website-scraper
 	url = https://github.com/kotl/node-website-scraper.git
